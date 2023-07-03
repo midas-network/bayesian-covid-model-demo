@@ -272,7 +272,7 @@ def run_place(data,
     if save:
 
         # Save samples
-        path = Path(prefix) / 'samples'
+        path = Path(prefix).resolve().parents[6] / "results" / 'samples'
         path.mkdir(parents=True, exist_ok=True)
         filename = path / f'{place}.npz'
         
@@ -283,7 +283,7 @@ def run_place(data,
                      forecast_samples,
                      save_fields=save_fields)
         
-        path = Path(prefix) / 'summary'
+        path = Path(prefix).resolve().parents[6] / "results" / 'summary'
         path.mkdir(parents=True, exist_ok=True)
         filename = path / f'{place}.txt'
         
@@ -343,7 +343,7 @@ def gen_forecasts(data,
     
 
     # Deal with paths
-    samples_path = Path(prefix) / 'samples'
+    samples_path = Path(prefix).resolve().parents[6] / "results" / 'samples'
     vis_path = Path(prefix) / 'vis'
     vis_path.mkdir(parents=True, exist_ok=True)
     
@@ -430,7 +430,7 @@ def score_place(forecast_date,
         raise ValueError('Invalid target')
 
 
-    filename = Path(prefix) / 'samples' / f'{place}.npz'
+    filename = Path(prefix).resolve().parents[6] / "results" / 'samples' / f'{place}.npz'
     prior_samples, mcmc_samples, post_pred_samples, forecast_samples = \
         load_samples(filename)
 
